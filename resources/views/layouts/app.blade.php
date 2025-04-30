@@ -19,7 +19,9 @@
     @endif
 </head>
 
+
 <body class="container mx-auto p-6">
+    <x-navigasi />
     @yield('content')
 </body>
 
