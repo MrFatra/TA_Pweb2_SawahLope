@@ -7,21 +7,21 @@
             <li>
                 <a
                     href=""
-                    class="text-green-400 relative font-semibold after:content-[''] after:absolute after:-bottom-2 after:left-1/2 after:-translate-x-1/2 after:w-10 after:h-[3px] after:bg-greetext-green-400 after:rounded-full">
+                    class="hover:text-green-500">
                     Beranda
                 </a>
             </li>
             <li>
-                <a href="">Makanan</a>
+                <a href="" class="hover:text-green-500">Makanan</a>
             </li>
             <li>
-                <a href="">Reservasi</a>
+                <a href="" class="hover:text-green-500">Reservasi</a>
             </li>
             <li>
-                <a href="">Artikel</a>
+                <a href="" class="hover:text-green-500">Artikel</a>
             </li>
             <li>
-                <a href="">Peta Panduan</a>
+                <a href="" class="hover:text-green-500">Peta Panduan</a>
             </li>
         </ul>
         <div class="shadow-md flex items-center justify-center rounded-full w-[40px] h-[40px]">
