@@ -6,7 +6,7 @@
         <ul class="flex gap-10 border-r-2 border-[#111] pr-6">
             <li>
                 <a
-                    href=""
+                    href="/"
                     class="hover:text-green-500">
                     Beranda
                 </a>
@@ -18,7 +18,7 @@
                 <a href="" class="hover:text-green-500">Reservasi</a>
             </li>
             <li>
-                <a href="" class="hover:text-green-500">Artikel</a>
+                <a href="/artikel" class="hover:text-green-500">Artikel</a>
             </li>
             <li>
                 <a href="" class="hover:text-green-500">Peta Panduan</a>

@@ -5,7 +5,7 @@
 
         <!-- Overlay hitam transparan -->
         <div class="absolute inset-0 bg-black opacity-50"></div>
-
+    
         <!-- Teks di atas gambar -->
         <div class="absolute inset-0 flex flex-col justify-center px-6 md:px-10">
             <div class="text-white max-w-2xl">
