@@ -14,11 +14,21 @@ class Ticket extends Model
         'phone_number',
         'email',
         'seat_number',
+        'ticket_code',
         'visit_date',
         'guest_count',
         'total_price',
         'status'
     ];
+
+    public static function generateTicketCode($ticket)
+    {
+        $usernameSlug = \Illuminate\Support\Str::slug($ticket['full_name']);
+
+        $randomString = strtoupper(\Illuminate\Support\Str::random(6));
+
+        return "SAWAHLOPE-{$ticket['id']}-{$usernameSlug}-{$randomString}";
+    }
 
     public function reservations()
     {

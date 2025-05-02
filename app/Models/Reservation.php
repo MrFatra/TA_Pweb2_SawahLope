@@ -26,8 +26,8 @@ class Reservation extends Model
         return $this->belongsTo(Ticket::class);
     }
 
-    public function payments()
+    public function payment()
     {
-        return $this->morphMany(Payment::class, 'payable');
+        return $this->morphOne(Payment::class, 'payable');
     }
 }
