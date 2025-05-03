@@ -21,11 +21,10 @@ class TicketSeeder extends Seeder
             'full_name' => 'Budi Santoso',
             'phone_number' => '081234567890',
             'email' => 'budi@example.com',
-            'seat_number' => 12,
             'ticket_code' => $ticketCode,
             'visit_date' => now()->addDays(2),
             'guest_count' => 2,
-            'total_price' => 100000,
+            'total_price' => 20000,
             'status' => 'confirmed'
         ]);
     }

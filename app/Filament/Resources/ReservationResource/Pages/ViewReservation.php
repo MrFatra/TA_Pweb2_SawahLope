@@ -16,4 +16,13 @@ class ViewReservation extends ViewRecord
             Actions\EditAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['ticket_code'] = $this->record->ticket->ticket_code;
+        $data['ticket_price'] = $this->record->ticket->total_price;
+
+        return $data;
+    }
+
 }

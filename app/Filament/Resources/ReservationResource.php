@@ -14,6 +14,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+use function PHPUnit\Framework\isFloat;
+
 class ReservationResource extends Resource
 {
     protected static ?string $model = Reservation::class;
@@ -34,19 +36,52 @@ class ReservationResource extends Resource
                     ->collapsible()
                     ->columns(2)
                     ->schema([
+                        Forms\Components\Select::make('ticket_id')
+                            ->label('Tiket Atas Nama')
+                            ->relationship(
+                                'ticket',
+                                'full_name',
+                                fn(Builder $query) => $query
+                                    ->where('status', 'confirmed')
+                                    ->orderBy('created_at', 'desc')
+                            )
+                            ->required()
+                            ->live()
+                            ->afterStateUpdated(function (\Filament\Forms\Set $set, \Filament\Forms\Get $get, $state) {
+                                $ticket = Ticket::find($state);
+
+                                if ($ticket) {
+                                    $set('full_name', $ticket->full_name);
+                                    $set('phone_number', $ticket->phone_number);
+                                    $set('email', $ticket->email);
+                                    $set('guest_count', $ticket->guest_count);
+                                    $set('seat_number', $ticket->seat_number);
+                                    $set('reservation_date', $ticket->visit_date);
+                                    $set('ticket_code', $ticket->ticket_code);
+                                    $set('ticket_price', $ticket->total_price * 1);
+
+                                    $menus = collect($get('reservationMenus'))->filter(fn($menu) => is_array($menu) && isset($menu['menu_id']));
+                                    self::updateTotals($get, $set, $menus, true);
+                                }
+                            })
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Pilih tiket'),
                         Forms\Components\TextInput::make('full_name')
                             ->label('Nama Lengkap')
                             ->required()
-                            ->live(onBlur: true)
+                            ->readOnly(fn($get) => $get('full_name') !== null)
                             ->maxLength(255),
                         Forms\Components\TextInput::make('phone_number')
                             ->label('Nomor Telepon')
                             ->nullable()
+                            ->readOnly(fn($get) => $get('phone_number') !== null)
                             ->tel()
                             ->maxLength(20),
                         Forms\Components\TextInput::make('email')
                             ->label('Email')
                             ->nullable()
+                            ->readOnly(fn($get) => $get('email') !== null)
                             ->email()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('seat_number')
@@ -60,74 +95,145 @@ class ReservationResource extends Resource
                             ->label('Jumlah Tamu')
                             ->required()
                             ->numeric()
+                            ->live()
+                            ->readOnly(fn($get) => $get('guest_count') !== null)
                             ->minValue(1)
                             ->maxValue(10),
-                        Forms\Components\DatePicker::make('reservation_date')
-                            ->label('Tanggal Kunjungan')
+                        Forms\Components\DateTimePicker::make('reservation_date')
+                            ->label('Tanggal Reservasi')
                             ->required()
+                            ->native(false)
+                            ->readOnly(fn($get) => $get('reservation_date') !== null)
                             ->minDate(now())
+                            ->maxDate(now()->addDays(30))
+                            ->placeholder('Tanggal reservasi'),
+                    ]),
+
+                Forms\Components\Section::make('Informasi Menu')
+                    ->description('Informasi terkait menu yang dipesan.')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Repeater::make('reservationMenus')
+                            ->label('Menu Makanan')
+                            ->relationship()
+                            ->live()
+                            ->schema([
+                                Forms\Components\Select::make('menu_id')
+                                    ->label('Menu')
+                                    ->options(\App\Models\Menu::pluck('name', 'id'))
+                                    ->required()
+                                    ->searchable()
+                                    ->afterStateUpdated(function (\Filament\Forms\Get $get, \Filament\Forms\Set $set) {
+                                        $menu = \App\Models\Menu::find($get('menu_id'));
+                                        $set('subtotal', $menu->price * $get('quantity'));
+                                    })
+                                    ->disableOptionWhen(function ($value, $state, \Filament\Forms\Get $get) {
+                                        return collect($get('../*.menu_id'))
+                                            ->reject(fn($id) => $id == $state)
+                                            ->filter()
+                                            ->contains($value);
+                                    })
+                                    ->live(),
+
+                                Forms\Components\TextInput::make('quantity')
+                                    ->label('Jumlah')
+                                    ->numeric()
+                                    ->default(1)
+                                    ->minValue(1)
+                                    ->suffixAction(
+                                        \Filament\Forms\Components\Actions\Action::make('add')
+                                            ->icon('heroicon-o-plus')
+                                            ->color('success')
+                                            ->action(function (\Filament\Forms\Get $get, \Filament\Forms\Set $set) {
+                                                $menu = \App\Models\Menu::find($get('menu_id'));
+                                                $set('quantity', $get('quantity') + 1);
+                                                $set('subtotal', $menu->price * $get('quantity'));
+                                                $menus = collect($get('../../reservationMenus'))->filter(fn($menu) => is_array($menu) && isset($menu['menu_id']));
+                                                self::updateTotals($get, $set, $menus, false);
+                                            })
+                                    )
+                                    ->prefixAction(
+                                        \Filament\Forms\Components\Actions\Action::make('subtract')
+                                            ->icon('heroicon-o-minus')
+                                            ->color('danger')
+                                            ->action(function (\Filament\Forms\Get $get, \Filament\Forms\Set $set) {
+                                                $menu = \App\Models\Menu::find($get('menu_id'));
+                                                $set('quantity', max(1, $get('quantity') - 1));
+                                                $set('subtotal', $menu->price * $get('quantity'));
+                                                $menus = collect($get('../../reservationMenus'))->filter(fn($menu) => is_array($menu) && isset($menu['menu_id']));
+                                                self::updateTotals($get, $set, $menus, false);
+                                            })
+                                    )
+                                    ->required()
+                                    ->live(),
+
+                                Forms\Components\TextInput::make('subtotal')
+                                    ->label('Subtotal')
+                                    ->numeric()
+                                    ->readOnly()
+                                    ->live()
+                            ])
+                            ->columns(3)
+                            ->addActionLabel('Tambah Menu')
+                            ->afterStateUpdated(function (\Filament\Forms\Get $get, \Filament\Forms\Set $set) {
+                                $menus = collect($get('reservationMenus'))->filter(fn($menu) => $menu['menu_id'] !== null);
+                                self::updateTotals($get, $set, $menus, true);
+                            })
+                            ->defaultItems(0)
                     ]),
                 Forms\Components\Section::make('Informasi Pembayaran')
-                    ->description('Informasi pembayaran reservasi.')
+                    ->description('Informasi terkait pembayaran reservasi.')
                     ->collapsible()
                     ->columns(2)
                     ->schema([
+                        Forms\Components\TextInput::make('ticket_price')
+                            ->label('Harga Tiket')
+                            ->required()
+                            ->prefix('Rp.')
+                            ->numeric()
+                            ->live()
+                            ->afterStateUpdated(function (\Filament\Forms\Get $get, \Filament\Forms\Set $set) {
+                                $menus = collect($get('../../reservationMenus'))->filter(fn($menu) => is_array($menu) && isset($menu['menu_id']));
+                                self::updateTotals($get, $set, $menus, true);
+                            })
+                            ->dehydrated(false)
+                            ->minValue(1)
+                            ->placeholder('Harga tiket')
+                            ->helperText('Harga tiket otomatis terisi berdasarkan jumlah tamu.')
+                            ->readOnly(),
                         Forms\Components\TextInput::make('total_price')
                             ->label('Total Harga')
                             ->required()
+                            ->prefix('Rp.')
                             ->numeric()
-                            ->minValue(0)
-                            ->prefix('Rp')
-                            ->placeholder('Masukkan total harga'),
-
-                        Forms\Components\Select::make('payable_type')
-                            ->label('Tipe Pembayaran')
-                            ->options([
-                                \App\Models\Reservation::class => 'Reservasi',
-                                \App\Models\Ticket::class => 'Tiket',
-                            ])
-                            ->nullable()
-                            ->reactive(),
-
-                        Forms\Components\Select::make('payable_id')
-                            ->label('Atas Nama Pembayaran')
-                            ->options(function (callable $get) {
-                                $type = $get('payable_type');
-                                return $type ? $type::pluck('full_name', 'id') : [];
-                            })
-                            ->nullable(),
-
-                        Forms\Components\TextInput::make('payment_method')
-                            ->label('Metode Pembayaran')
-                            ->required()
-                            ->placeholder('Masukkan metode pembayaran')
-                            ->maxLength(255),
+                            ->live()
+                            ->minValue(1)
+                            ->helperText('Total harga tiket otomatis terisi berdasarkan jumlah tamu.')
+                            ->readOnly()
                     ]),
+
                 Forms\Components\Section::make('Informasi Tiket')
                     ->description('Silakan isi informasi tiket dengan lengkap dan benar.')
                     ->collapsible()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\Group::make([
-                            Forms\Components\TextInput::make('ticket_code')
-                                ->label('Kode Tiket')
-                                ->password()
-                                ->revealable()
-                                ->prefixAction(
-                                    \Filament\Forms\Components\Actions\Action::make('copy')
-                                        ->icon('heroicon-o-clipboard-document')
-                                        ->tooltip('Copy ke clipboard')
-                                        ->color('gray')
-                                        ->action(function ($livewire, $state) {
-                                            $livewire->js(
-                                                'window.navigator.clipboard.writeText("' . $state . '")'
-                                            );
-                                        })
-                                )
-                                ->readOnly()
-                                ->unique(Ticket::class, 'ticket_code', fn($record) => $record)
-                                ->readOnly(),
-                        ])->relationship('ticket', 'ticket_code'),
+                        Forms\Components\TextInput::make('ticket_code')
+                            ->label('Kode Tiket')
+                            ->password()
+                            ->revealable()
+                            ->prefixAction(
+                                \Filament\Forms\Components\Actions\Action::make('copy')
+                                    ->icon('heroicon-o-clipboard-document')
+                                    ->tooltip('Copy ke clipboard')
+                                    ->color('gray')
+                                    ->action(function ($livewire, $state) {
+                                        $livewire->js(
+                                            'window.navigator.clipboard.writeText("' . $state . '")'
+                                        );
+                                    })
+                            )
+                            ->dehydrated(false)
+                            ->readOnly(),
                         Forms\Components\ToggleButtons::make('status')
                             ->label('Status')
                             ->inline()
@@ -149,6 +255,19 @@ class ReservationResource extends Resource
                             ]),
                     ]),
             ]);
+    }
+
+    public static function updateTotals(\Filament\Forms\Get $get, \Filament\Forms\Set $set, object $menus, bool $isOuterRoot): void
+    {
+        $prices = \App\Models\Menu::whereIn('id', $menus->pluck('menu_id'))->pluck('price', 'id');
+
+        $menuTotal = $menus->reduce(function ($subtotal, $menu) use ($prices) {
+            return $subtotal + ($prices[$menu['menu_id']] * $menu['quantity']);
+        }, 0);
+
+        $ticketPrice = $isOuterRoot ? $get('ticket_price') : $get('../../ticket_price');
+
+        $isOuterRoot ? $set('total_price', $menuTotal + $ticketPrice) : $set('../../total_price', $menuTotal + $ticketPrice);
     }
 
     public static function table(Table $table): Table
@@ -185,9 +304,9 @@ class ReservationResource extends Resource
                         };
                     })
                     ->colors([
-                        'pending' => 'warning',
-                        'confirmed' => 'success',
-                        'canceled' => 'danger',
+                        'warning' => 'pending',
+                        'success' => 'confirmed',
+                        'danger' => 'canceled',
                     ]),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dibuat Pada')
@@ -199,7 +318,20 @@ class ReservationResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->color('info'),
+                Tables\Actions\Action::make('konfirmasi')
+                    ->label('Konfirmasi')
+                    ->action(function (Reservation $record) {
+                        $record->update(['status' => 'confirmed']);
+                        \Filament\Notifications\Notification::make()
+                            ->title('Reservasi berhasil dikonfirmasi')
+                            ->success()
+                            ->send();
+                    })
+                    ->requiresConfirmation()
+                    ->visible(fn($record) => $record->status !== 'confirmed')
+                    ->color('success')
+                    ->icon('heroicon-o-check-circle'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

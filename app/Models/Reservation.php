@@ -30,4 +30,9 @@ class Reservation extends Model
     {
         return $this->morphOne(Payment::class, 'payable');
     }
+
+    public function reservationMenus()
+    {
+        return $this->HasMany(ReservationMenu::class, 'reservation_id', 'id');
+    }
 }

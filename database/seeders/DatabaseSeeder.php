@@ -2,9 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Payment;
-use App\Models\Reservation;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +19,7 @@ class DatabaseSeeder extends Seeder
             RatingSeeder::class,
             TicketSeeder::class,
             ReservationSeeder::class,
+            ReservationMenuSeeder::class,
             PaymentSeeder::class
         ]);
     }

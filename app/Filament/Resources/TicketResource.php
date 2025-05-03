@@ -29,7 +29,7 @@ class TicketResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Informasi Pengunjung')
-                    ->description('Silakan isi informasi pengunjung dengan lengkap dan benar.')
+                    ->description('Informasi tentang pengunjung yang akan datang.')
                     ->collapsible()
                     ->columns(2)
                     ->schema([
@@ -58,15 +58,10 @@ class TicketResource extends Resource
                             ->maxLength(255)
                     ]),
                 Forms\Components\Section::make('Informasi Tiket')
-                    ->description('Silakan isi informasi tiket dengan lengkap dan benar.')
+                    ->description('Informasi tiket yang akan dibeli.')
                     ->collapsible()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('seat_number')
-                            ->label('Nomor Meja')
-                            ->required()
-                            ->numeric()
-                            ->maxLength(255),
                         Forms\Components\DateTimePicker::make('visit_date')
                             ->label('Tanggal Kunjungan')
                             ->required()
@@ -79,7 +74,11 @@ class TicketResource extends Resource
                             ->required()
                             ->numeric()
                             ->minValue(1)
-                            ->placeholder('Masukkan jumlah tamu'),
+                            ->placeholder('Masukkan jumlah tamu')
+                            ->live()
+                            ->afterStateUpdated(function (callable $set, $state) {
+                                $set('total_price', $state * 10000);
+                            }),
                         Forms\Components\TextInput::make('ticket_code')
                             ->label('Kode Tiket')
                             ->password()
@@ -99,8 +98,9 @@ class TicketResource extends Resource
                             ->unique(Ticket::class, 'ticket_code', fn($record) => $record)
                             ->readOnly(),
                     ]),
+
                 Forms\Components\Section::make('Informasi Pembayaran')
-                    ->description('Silakan isi informasi pembayaran dengan lengkap dan benar.')
+                    ->description('Informasi pembayaran yang akan dilakukan.')
                     ->collapsible()
                     ->schema([
                         Forms\Components\TextInput::make('total_price')
@@ -109,10 +109,13 @@ class TicketResource extends Resource
                             ->numeric()
                             ->minValue(0)
                             ->prefix('Rp')
-                            ->placeholder('Masukkan total harga')
+                            ->readOnly()
+                            ->placeholder('Total harga')
+                            ->helperText('Total harga tiket otomatis terisi berdasarkan jumlah tamu')
                     ]),
+
                 Forms\Components\Section::make('Status Tiket')
-                    ->description('Silakan pilih status tiket.')
+                    ->description('Konfirmasi tiket yang akan dibeli.')
                     ->collapsible()
                     ->columns(2)
                     ->schema([
@@ -174,9 +177,9 @@ class TicketResource extends Resource
                         };
                     })
                     ->colors([
-                        'pending' => 'warning',
-                        'confirmed' => 'success',
-                        'canceled' => 'danger',
+                        'warning' => 'pending',
+                        'success' => 'confirmed',
+                        'danger' => 'canceled',
                     ]),
             ])
             ->filters([
@@ -184,7 +187,20 @@ class TicketResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->color('info'),
+                Tables\Actions\Action::make('konfirmasi')
+                    ->label('Konfirmasi')
+                    ->action(function (Ticket $record) {
+                        $record->update(['status' => 'confirmed']);
+                        \Filament\Notifications\Notification::make()
+                            ->title('Tiket berhasil dikonfirmasi')
+                            ->success()
+                            ->send();
+                    })
+                    ->requiresConfirmation()
+                    ->visible(fn($record) => $record->status !== 'confirmed')
+                    ->color('success')
+                    ->icon('heroicon-o-check-circle'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
