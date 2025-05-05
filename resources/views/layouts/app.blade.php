@@ -27,6 +27,7 @@
 <body class="container mx-auto p-6">
     <x-navigasi />
     @yield('content')
+    <x-footer></x-footer>
 </body>
 
 </html>
