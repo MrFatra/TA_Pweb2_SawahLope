@@ -17,17 +17,19 @@
 
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @else ()
-    <link rel="stylesheet" href="resources/css/index.css">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="resources/css/index.css">
     @endif
 </head>
 
 
-<body class="container mx-auto p-6">
+<body>
     <x-navigasi />
-    @yield('content')
-    <x-footer></x-footer>
+    <div class="container mx-auto">
+        @yield('content')
+    </div>
+    <x-footer />
 </body>
 
 </html>

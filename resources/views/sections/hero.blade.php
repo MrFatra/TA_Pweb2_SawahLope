@@ -1,4 +1,4 @@
-<section class="mt-17 relative grid md:grid-cols-2 pt-10 px-5 md:px-10 max-h-[700px] overflow-y-hidden after:absolute after:bg-gradient-to-t after:from-white after:to-white/10 after:w-full after:h-[130px] after:bottom-0">
+<section class="relative grid md:grid-cols-2 pt-10 px-5 md:px-10 max-h-[700px] overflow-y-hidden after:absolute after:bg-gradient-to-t after:from-white after:to-white/10 after:w-full after:h-[130px] after:bottom-0">
     <!-- Konten Teks -->
     <div class="h-full flex-col justify-center items-center lg:pt-20 pt-5">
         <h4 class="lg:text-2xl text-lg font-semibold text-green-500 mb-5">
