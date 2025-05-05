@@ -1,6 +1,6 @@
-<nav class="flex top-0 justify-between items-center bg-white text-[#111] px-10 py-7 shadow fixed left-0 right-0 z-30">
+<nav class="flex top-0 justify-between items-center bg-white text-[#111] px-10 py-1 shadow fixed left-0 right-0 z-30">
     <div class="flex items-center ml-4">
-        <img src="/assets/img/LogoSawahLope.png" alt="Logo Sawah Lope" class="w-24 h-auto" />
+        <img src="{{ asset('images/logo.png') }}" alt="Logo Sawah Lope" class="w-24 h-auto" />
         <h2 class="text-green-500 font-semibold text-xl ml-0">Sawah Lope</h2>
     </div>
 
