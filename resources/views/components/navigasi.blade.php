@@ -1,9 +1,9 @@
 <!-- Navbar -->
 <nav class="bg-white fixed w-full top-0 left-0 z-30 shadow">
-    <div class="flex justify-between items-center px-10 py-4">
+    <div class="flex justify-between items-center px-10 py-5">
         <!-- Logo -->
         <div class="flex items-center space-x-3">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo Sawah Lope" class="w-24 h-auto" />
+            <img src="{{ asset('images/logo.png') }}" alt="Logo Sawah Lope" class="w-10 h-auto" />
             <h2 class="text-green-500 font-semibold text-xl">Sawah Lope</h2>
         </div>
 

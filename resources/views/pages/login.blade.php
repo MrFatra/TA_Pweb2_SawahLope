@@ -8,17 +8,28 @@
         </div>
 
         <div class="w-full md:w-1/2 flex justify-center p-10 flex-col">
-            {{-- TODO add logo from navbar --}}
-            <h1 class="text-green-500 font-semibold text-4xl mb-5">Sawah Lope</h1>
+            <div class="flex items-center mb-5 gap-2">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo Sawah Lope" class="w-10 h-auto" />
+                <h1 class="text-green-500 font-semibold text-4xl">Sawah Lope</h1>
+            </div>
             <h2 class="text-3xl font-bold">Login</h2>
-            <p class="text-gray-500 mb-10">Silahkan masukkan kode tiket pada form dibawah ini untuk melanjutkan pesanan.</p>
+            <p class="text-gray-500 mb-8">Silahkan masukkan kode tiket pada form dibawah ini untuk melanjutkan pesanan.</p>
             <form method="POST" action="{{ route('login') }}" class="">
                 @csrf
-                <div class="mb-4">
+                <div class="mb-10">
                     <label for="ticket" class="block text-sm font-medium text-gray-700">Kode Tiket</label>
-                    <input id="ticket" name="ticket" type="text" required autofocus
-                    placeholder="Masukkan Kode Tiket"
-                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-5 py-4">
+                    <div class="relative">
+                        <input id="ticket" name="ticket" type="text" required autofocus
+                            placeholder="Masukkan Kode Tiket"
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-5 py-4 pr-12">
+
+                        <!-- Ikon Eye -->
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer">
+                            <i class="fa-solid fa-eye fa-lg text-gray-500"></i>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 font-medium mt-1">Kode tiket dikirim melalui email. Siahkan cek email
+                        anda.</p>
                 </div>
                 <button type="submit"
                     class="w-full bg-green-500 text-white py-3 rounded-md hover:bg-green-700 transition cursor-pointer">Login</button>
