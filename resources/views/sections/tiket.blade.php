@@ -3,7 +3,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <!-- Tiket Dewasa 1 -->
-        <div class="flex flex-col items-center border-r md:border-r-2 border-green-500 pr-4 md:pr-10">
+        <div class="flex flex-col items-center lg:border-r md:border-r-2 border-green-500 pr-4 md:pr-10">
             <i class="fa-solid fa-person text-5xl mb-4 text-gray-700"></i>
             <h2 class="text-2xl font-bold text-center mb-2">DEWASA</h2>
             <p class="text-xl text-center mb-6">Rp. 10.000</p>

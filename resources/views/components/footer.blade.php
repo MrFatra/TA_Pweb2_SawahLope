@@ -1,4 +1,6 @@
-<footer class="bg-gray-100 text-center py-6">
+<footer class="text-center">
+    <hr class="border-t-4 border-green-500 w-4/5 mx-auto my-6">
+
     <div class="links flex flex-wrap justify-center gap-4 mb-4">
         <a href="beranda" class="text-gray-700 hover:text-green-500">Beranda</a>
         <a href="makanan" class="text-gray-700 hover:text-green-500">Makanan</a>
@@ -10,7 +12,7 @@
     <div class="socials flex justify-center gap-6 text-xl mb-4 text-gray-700">
         <a href="#"><i class="fa-brands fa-instagram hover:text-pink-500"></i></a>
         <a href="#"><i class="fa-brands fa-tiktok hover:text-black"></i></a>
-        <a href="#"><i class="fa-brands fa-x-twitter hover:text-blue-500"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter hover:text-black"></i></a>
         <a href="#"><i class="fa-brands fa-youtube hover:text-red-500"></i></a>
     </div>
 

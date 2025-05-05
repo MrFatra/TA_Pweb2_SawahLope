@@ -1,6 +1,6 @@
 <section class="py-16 px-10 ">
     <div class="flex justify-between pb-3">
-        <h1 class="text-3xl font-semibold text-green-500 mb-5">Sekilas Makanan</h1>
+        <h1 class="lg:text-3xl text-xl font-semibold text-green-500 mb-5">Sekilas Makanan</h1>
         <a href="">See all -></a>
     </div>
     <div class="grid md:grid-cols-4 grid-cols-1 gap-8">

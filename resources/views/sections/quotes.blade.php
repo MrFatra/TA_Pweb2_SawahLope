@@ -9,10 +9,10 @@
         <!-- Teks di atas gambar -->
         <div class="absolute inset-0 flex flex-col justify-center px-6 md:px-10">
             <div class="text-white max-w-2xl">
-                <h1 class="text-3xl md:text-5xl font-extrabold mb-4">
+                <h1 class="lg:text-3xl text-xl md:text-5xl font-extrabold mb-4">
                     Sawah Lope
                 </h1>
-                <h2 class="text-gray-200 text-lg md:text-xl font-medium text-justify leading-relaxed">
+                <h2 class="text-gray-200 lg:text-lg text-sm md:text-xl font-medium text-justify leading-relaxed">
                     "Tempat di mana ketenangan alam menyatu dengan kedamaian hati. Di sini, hijau sawah dan udara segar mengingatkan kita untuk kembali ke alam, menikmati hidup dengan penuh rasa syukur."
                 </h2>
             </div>
