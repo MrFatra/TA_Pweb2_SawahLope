@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
 {
+
     public function show()
     {
-        // $artikel = Artikel::findOrFail($id);
-
         return view('pages.artikel');
+    }
+
+    public function showDetail()
+    {
+        return view('pages.detail-artikel');
     }
 }

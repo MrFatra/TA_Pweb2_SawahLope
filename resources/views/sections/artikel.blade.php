@@ -118,7 +118,7 @@
                 <div class="md:col-span-3 md:mt-0 mt-3">
                     <p class="text-green-500 font-semibold">PERMAINAN</p>
 
-                    <a href="detail.html">
+                    <a href="/detail-artikel">
                         <h3
                             class="text-xl font-bold mb-3 text-gray-900 dark:text-gray-200">
                             Papalidan: Serunya Mengarungi Sungai dengan Ban Bekas, Pengalam Tak Terlupakan
@@ -214,65 +214,65 @@
     </div>
     <!--Pagination-->
     <div class="flex justify-center mt-10 mb-10">
-    <ul class="inline-flex items-center gap-2 -space-x-px text-sm">
-        <!-- Previous Button -->
-        <li>
-            <a
-                href="#"
-                class="flex items-center justify-center px-3 h-8 leading-tight rounded-l-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
-                <i class="fa-solid fa-chevron-left"></i>
-            </a>
-        </li>
-        
-        <!-- Page Number 1 (Active) -->
-        <li>
-            <a
-                href="#"
-                class="flex items-center justify-center px-3 h-8 leading-tight rounded-md text-white bg-green-500">
-                1
-            </a>
-        </li>
-        
-        <!-- Other Page Numbers -->
-        <li>
-            <a
-                href="#"
-                class="flex items-center justify-center px-3 h-8 rounded-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
-                2
-            </a>
-        </li>
-        <li>
-            <a
-                href="#"
-                class="flex items-center justify-center px-3 h-8 rounded-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
-                3
-            </a>
-        </li>
-        <li>
-            <a
-                href="#"
-                class="flex items-center justify-center px-3 h-8 rounded-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
-                4
-            </a>
-        </li>
-        <li>
-            <a
-                href="#"
-                class="flex items-center justify-center px-3 h-8 rounded-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
-                5
-            </a>
-        </li>
+        <ul class="inline-flex items-center gap-2 -space-x-px text-sm">
+            <!-- Previous Button -->
+            <li>
+                <a
+                    href="#"
+                    class="flex items-center justify-center px-3 h-8 leading-tight rounded-l-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+            </li>
 
-        <!-- Next Button -->
-        <li>
-            <a
-                href="#"
-                class="flex items-center justify-center px-3 h-8 leading-tight rounded-r-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
-                <i class="fa-solid fa-chevron-right"></i>
-            </a>
-        </li>
-    </ul>
-</div>
+            <!-- Page Number 1 (Active) -->
+            <li>
+                <a
+                    href="#"
+                    class="flex items-center justify-center px-3 h-8 leading-tight rounded-md text-white bg-green-500">
+                    1
+                </a>
+            </li>
+
+            <!-- Other Page Numbers -->
+            <li>
+                <a
+                    href="#"
+                    class="flex items-center justify-center px-3 h-8 rounded-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
+                    2
+                </a>
+            </li>
+            <li>
+                <a
+                    href="#"
+                    class="flex items-center justify-center px-3 h-8 rounded-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
+                    3
+                </a>
+            </li>
+            <li>
+                <a
+                    href="#"
+                    class="flex items-center justify-center px-3 h-8 rounded-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
+                    4
+                </a>
+            </li>
+            <li>
+                <a
+                    href="#"
+                    class="flex items-center justify-center px-3 h-8 rounded-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
+                    5
+                </a>
+            </li>
+
+            <!-- Next Button -->
+            <li>
+                <a
+                    href="#"
+                    class="flex items-center justify-center px-3 h-8 leading-tight rounded-r-md bg-gray-200 text-gray-900 hover:bg-green-700 hover:text-white dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-green-700 dark:hover:text-white">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
 
 
 
