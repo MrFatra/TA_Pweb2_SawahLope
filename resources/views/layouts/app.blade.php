@@ -23,7 +23,6 @@
     @endif
 </head>
 
-
 <body>
     <x-navigasi />
     <div class="container mx-auto">

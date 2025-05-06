@@ -14,7 +14,7 @@
             </div>
             <h2 class="text-3xl font-bold">Login</h2>
             <p class="text-gray-500 mb-8">Silahkan masukkan kode tiket pada form dibawah ini untuk melanjutkan pesanan.</p>
-            <form method="POST" action="{{ route('login') }}" class="">
+            <form method="POST" action="{{ route('auth.login') }}" class="">
                 @csrf
                 <div class="mb-10">
                     <label for="ticket" class="block text-sm font-medium text-gray-700">Kode Tiket</label>
@@ -25,7 +25,7 @@
 
                         <!-- Ikon Eye -->
                         <div class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer">
-                            <i class="fa-solid fa-eye fa-lg text-gray-500"></i>
+                            <i class="fa-solid fa-eye-slash fa-lg text-gray-500"></i>
                         </div>
                     </div>
                     <p class="text-sm text-gray-500 font-medium mt-1">Kode tiket dikirim melalui email. Siahkan cek email
@@ -34,6 +34,25 @@
                 <button type="submit"
                     class="w-full bg-green-500 text-white py-3 rounded-md hover:bg-green-700 transition cursor-pointer">Login</button>
             </form>
+            <p class="font-medium text-gray-500 mt-3">Belum membeli tiket? <a href="{{ route('pay.buyTicket.view') }}"
+                    class="text-blue-500 hover:underline">Beli sekarang!</a></p>
         </div>
     </div>
+
+    <script>
+        const input = document.getElementById('ticket');
+        const eyeIcon = document.querySelector('.fa-eye-slash');
+
+        eyeIcon.addEventListener('click', () => {
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        });
+    </script>
 @endsection
