@@ -1,7 +1,7 @@
-<section class="py-16 px-10 ">
+<section class="pb-16 lg:px-10 px-4">
     <div class="flex justify-between pb-3">
         <h1 class="lg:text-3xl text-xl font-semibold text-green-500 mb-5">Sekilas Makanan</h1>
-        <a href="">See all -></a>
+        <a href="">Lihat Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="grid md:grid-cols-4 grid-cols-1 gap-8">
         <div class="hoverCard group relative rounded overflow-hidden cursor-pointer after:content-[''] hover:after:absolute after:inset-0 after:bg-[#34e0a1]/90">
