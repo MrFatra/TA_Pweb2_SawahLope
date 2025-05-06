@@ -18,9 +18,10 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             RatingSeeder::class,
             TicketSeeder::class,
+            CartSeeder::class,
             ReservationSeeder::class,
             ReservationMenuSeeder::class,
-            PaymentSeeder::class
+            PaymentSeeder::class,
         ]);
     }
 }

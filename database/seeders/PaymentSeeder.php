@@ -18,10 +18,10 @@ class PaymentSeeder extends Seeder
             'email' => 'budi@example.com',
             'payable_id' => 1,
             'payable_type' => \App\Models\Ticket::class,
-            'amount' => 100000,
+            'gross_amount' => 100000,
             'status' => 'paid',
             'payment_method' => 'qris',
-            'transaction_id' => 'TX123456789'
+            'order_id' => \App\Helpers\MidtransConfig::makeId()
         ]);
     }
 }

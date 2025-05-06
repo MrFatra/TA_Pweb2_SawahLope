@@ -15,10 +15,10 @@ class Payment extends Model
         'email',
         'payable_id',
         'payable_type',
-        'amount',
+        'gross_amount',
         'status',
         'payment_method',
-        'transaction_id'
+        'order_id'
     ];
 
     public function payable()

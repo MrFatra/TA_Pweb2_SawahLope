@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
-            $table->text('ticket_code')->unique();
+            $table->string('ticket_code', 255)->unique()->nullable();
             $table->date('visit_date');
             $table->integer('guest_count');
             $table->decimal('total_price', 8, 2);

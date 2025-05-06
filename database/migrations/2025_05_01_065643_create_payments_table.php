@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
             $table->nullableMorphs('payable');
-            $table->decimal('amount', 10, 2);
+            $table->decimal('gross_amount', 10, 2);
             $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
             $table->string('payment_method')->nullable();
-            $table->string('transaction_id')->nullable();
+            $table->string('order_id')->nullable()->unique();
             $table->timestamps();
         });        
     }
