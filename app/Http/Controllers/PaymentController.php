@@ -104,6 +104,7 @@ class PaymentController extends Controller
         Mail::to($ticket->email)->send(new TicketNotification($ticket));
 
         session()->forget(['snapToken', 'ticket_id']);
+        session()->regenerate();
 
         return response()->json(['message' => 'Pembayaran berhasil. Silahkan cek email anda untuk mendapatkan kode.']);;
     }
