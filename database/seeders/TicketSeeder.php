@@ -12,7 +12,7 @@ class TicketSeeder extends Seeder
      */
     public function run(): void
     {
-        $id = \Illuminate\Support\Str::uuid();
+        $id = \App\Models\User::where('id', 1)->first()->id;
         $usernameSlug = \Illuminate\Support\Str::slug('Budi Santoso');
         $randomString = strtoupper(\Illuminate\Support\Str::random(6));
         $ticketCode = "SAWAHLOPE-{$id}-{$usernameSlug}-{$randomString}";
