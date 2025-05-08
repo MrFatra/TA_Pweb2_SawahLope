@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Email from Laravel 12</title>
+    <title>Email from Sawah Lope</title>
 </head>
 
 <body>
