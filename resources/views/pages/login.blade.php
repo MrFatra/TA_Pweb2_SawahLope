@@ -17,9 +17,9 @@
             <form method="POST" action="{{ route('auth.login') }}" class="">
                 @csrf
                 <div class="mb-10">
-                    <label for="ticket" class="block text-sm font-medium text-gray-700">Kode Tiket</label>
+                    <label for="ticket_code" class="block text-sm font-medium text-gray-700">Kode Tiket</label>
                     <div class="relative">
-                        <input id="ticket" name="ticket" type="text" required autofocus
+                        <input id="ticket_code" name="ticket_code" type="text" required autofocus
                             placeholder="Masukkan Kode Tiket"
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-5 py-4 pr-12">
 
@@ -40,7 +40,7 @@
     </div>
 
     <script>
-        const input = document.getElementById('ticket');
+        const input = document.getElementById('ticket_code');
         const eyeIcon = document.querySelector('.fa-eye-slash');
 
         eyeIcon.addEventListener('click', () => {
