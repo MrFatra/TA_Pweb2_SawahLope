@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
-            $table->integer('seat_number');
+            $table->integer('seat_number')->nullable();
             $table->date('reservation_date');
             $table->integer('guest_count');
             $table->decimal('total_price', 8, 2);
