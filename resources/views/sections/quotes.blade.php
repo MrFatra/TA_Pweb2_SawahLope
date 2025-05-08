@@ -1,12 +1,7 @@
-<section class="py-7 px-6 md:px-10">
+<section class="py-7  md:px-10">
     <div class="relative h-[400px] rounded-xl overflow-hidden">
-        <!-- Gambar latar -->
         <img src="https://getlost.id/wp-content/uploads/2021/04/ciremai_1799578267.jpg" alt="" class="w-full h-full object-cover">
-
-        <!-- Overlay hitam transparan -->
         <div class="absolute inset-0 bg-black opacity-50"></div>
-    
-        <!-- Teks di atas gambar -->
         <div class="absolute inset-0 flex flex-col justify-center px-6 md:px-10">
             <div class="text-white max-w-2xl">
                 <h1 class="lg:text-3xl text-xl md:text-5xl font-extrabold mb-4">

@@ -1,5 +1,6 @@
 <footer class="text-center">
     <hr class="border-t-4 border-green-500 w-4/5 mx-auto my-6">
+<div class="pb-5">
 
     <div class="links flex flex-wrap justify-center gap-4 mb-4">
         <a href="beranda" class="text-gray-700 hover:text-green-500">Beranda</a>
@@ -19,4 +20,5 @@
     <div class="credit text-gray-600">
         <p><a href="#" class="font-semibold text-gray-800 hover:text-green-600">SAWAH LOPE</a> | &copy; 2025.</p>
     </div>
+</div>
 </footer>
