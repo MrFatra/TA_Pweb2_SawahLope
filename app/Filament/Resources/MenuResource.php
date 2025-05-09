@@ -38,7 +38,7 @@ class MenuResource extends Resource
                         $set('slug', \Illuminate\Support\Str::slug($state));
                     }),
                 Forms\Components\TextInput::make('slug')
-                    ->disabled()
+                    ->readOnly()
                     ->helperText('Slug akan terisi otomatis jika telah selesai mengedit form "Nama Menu".')
                     ->required()
                     ->maxLength(255)
@@ -67,6 +67,9 @@ class MenuResource extends Resource
                     ->downloadable()
                     ->reorderable()
                     ->imageEditor()
+                    ->disk('public')
+                    ->visibility('public')
+                    ->directory('menus')
                     ->imageEditorAspectRatios([
                         '16:9',
                         '4:3',
