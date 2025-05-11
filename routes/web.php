@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
@@ -11,7 +11,8 @@ Route::get('/', function () {
     return view('pages.landing');
 })->name('landing');
 
-Route::get('/artikel', [ArtikelController::class, 'show']);
+Route::get('/artikel', [ArticleController::class, 'show'])->name('article.list');
+Route::get('/artikel/{slug}', [ArticleController::class, 'articleDetail'])->name('article.detail');
 
 Route::get('/list-menu', [MenuController::class, 'viewList'])->name('menu.list');
 
