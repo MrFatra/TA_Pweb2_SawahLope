@@ -19,6 +19,7 @@ Route::get('/list-menu', [MenuController::class, 'viewList'])->name('menu.list')
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'viewLogin'])->name('auth.login.view');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
 Route::middleware('has.ticket')->group(function () {

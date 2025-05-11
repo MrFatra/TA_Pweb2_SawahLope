@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OrderStatusUpdated;
-use App\Helpers\MidtransConfig;
-use App\Mail\TicketNotification;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Midtrans\Snap;
 
 class AuthController extends Controller
 {
+
     public function viewLogin()
     {
         return view('pages.login');
@@ -25,12 +21,23 @@ class AuthController extends Controller
 
         $ticket = Ticket::where('ticket_code', $request->ticket_code)->first();
 
-        if (!$ticket) return back()->withErrors(['ticket_code' => 'Kode tiket tidak valid.']);
+        if (!$ticket) {
+            toast()->error('Yah!', 'Kode tiket yang Anda berikan tidak valid.');
+            return redirect()->back();
+        }
 
-        session(['ticket_id' => $ticket->id]);
+        session([
+            'ticket_id' => $ticket->id,
+            'full_name' => $ticket->full_name
+        ]);
 
-        return redirect()->route('landing')->with('success', 'Login berhasil.');
+        toast()->success('Login berhasil!', 'Selamat Datang!')->position('bottom-end');
+        return redirect()->route('landing');
     }
 
-    
+    public function logout()
+    {
+        session()->flush();
+        return redirect()->route('landing');
+    }
 }

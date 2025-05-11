@@ -14,6 +14,8 @@
     <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
 
     <!-- Styles / Scripts -->
@@ -26,13 +28,12 @@
 </head>
 
 <body class="">
-    <livewire:toasts />
+    @include('sweetalert::alert')
 
     @yield('content')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
-    @livewireScriptConfig
 </body>
 
 </html>

@@ -13,7 +13,7 @@
         "midtrans/midtrans-php": "^2.6",
         "mohamedsabil83/filament-forms-tinyeditor": "^2.4",
         "mokhosh/filament-rating": "^1.4",
-        "usernotnull/tall-toasts": "^2.2"
+        "realrashid/sweet-alert": "^7.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
