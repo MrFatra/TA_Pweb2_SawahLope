@@ -15,6 +15,9 @@ Route::get('/artikel', [ArticleController::class, 'show'])->name('article.list')
 Route::get('/artikel/{slug}', [ArticleController::class, 'articleDetail'])->name('article.detail');
 
 Route::get('/list-menu', [MenuController::class, 'viewList'])->name('menu.list');
+Route::get('/panduan-peta', function () {
+    return view('pages.peta');
+})->name('peta');
 
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'viewLogin'])->name('auth.login.view');

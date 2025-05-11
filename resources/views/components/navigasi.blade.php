@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"
+                <a href="{{ route('peta') }}"
                     class="relative text-[#111] hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
                     Peta Panduan
                 </a>
@@ -87,7 +87,7 @@
             <li><a href="{{ route('landing') }}" class="text-[#111] hover:text-green-500">Beranda</a></li>
             <li><a href="{{ route('menu.list') }}" class="text-[#111] hover:text-green-500">Makanan</a></li>
             <li><a href="{{ route('article.list') }}" class="text-[#111] hover:text-green-500">Artikel</a></li>
-            <li><a href="#" class="text-[#111] hover:text-green-500">Peta Panduan</a></li>
+            <li><a href="{{ route('peta') }}" class="text-[#111] hover:text-green-500">Peta Panduan</a></li>
             <li>
                 <img class=""
                     src="https://ui-avatars.com/api/?name={{ session('full_name') }}&background=random&rounded=true"
