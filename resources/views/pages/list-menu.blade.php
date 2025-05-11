@@ -33,7 +33,7 @@
                                             <p class="mt-2 mb-4 text-justify">{{ $menu->description }}</p>
                                         </div>
                                     </div>
-                                    <h4 class="font-semibold text-lg pt-5 pl-3">{{ $menu->price }}</h4>
+                                    <h4 class="font-semibold text-lg pt-5 pl-3">Rp. {{ number_format($menu->price, 0, ',', '.') }}</h4>
                                     <form action="{{ route('cart.add') }}" method="POST" class="flex flex-col">
                                         <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                                         @csrf
@@ -118,7 +118,7 @@
                 btn.addEventListener("click", function() {
                     const input = this.parentElement.querySelector(".menu-qty");
                     let value = parseInt(input.value) || 0;
-                    if (value > 0) input.value = value - 1;
+                    if (value > 1) input.value = value - 1;
                 });
             });
         });
