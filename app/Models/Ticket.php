@@ -39,4 +39,8 @@ class Ticket extends Model
     {
         return $this->morphMany(Payment::class, 'payable');
     }
+
+    public function carts() {
+        return $this->hasMany(Cart::class);
+    }
 }

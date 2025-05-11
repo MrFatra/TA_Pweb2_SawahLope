@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
-use Illuminate\Http\Request;
+use App\Models\FoodCategory;
+use App\Models\Ticket;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class MenuController extends Controller
 {
-    public function viewList() {
-        $menus = Menu::all();
+    public function viewList()
+    {
+        $menus = FoodCategory::with('menus')->get();
 
-        return view('pages.list-menu');
+        $ticketId = session('ticket_id');
+
+        $carts = [];
+
+        if ($ticketId) {
+            $carts = Ticket::find($ticketId)?->carts()->with('menu')->get() ?? collect();
+        }
+
+        return view('pages.list-menu', compact('menus', 'carts'));
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
@@ -12,11 +13,16 @@ Route::get('/', function () {
 
 Route::get('/artikel', [ArtikelController::class, 'show']);
 
-Route::get('/list-menu', [MenuController::class, 'viewList']);
+Route::get('/list-menu', [MenuController::class, 'viewList'])->name('menu.list');
 
 Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'viewLogin'])->name('auth.login.view');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+});
+
+Route::middleware('has.ticket')->group(function () {
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
 
 Route::prefix('payment')->group(function () {

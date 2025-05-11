@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     protected $fillable = [
-        'ticket_code',
+        'ticket_id',
         'menu_id',
         'quantity',
     ];
 
     public function ticket()
     {
-        return $this->belongsTo(ticket::class);
+        return $this->belongsTo(Ticket::class);
     }
 
     public function menu()
