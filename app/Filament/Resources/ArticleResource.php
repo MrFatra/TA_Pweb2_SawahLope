@@ -67,6 +67,9 @@ class ArticleResource extends Resource
                     ->preload()
                     ->searchable(),
                 FileUpload::make('image')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->directory('articles')
                     ->label('Gambar')
                     ->image()
                     ->openable()
@@ -82,7 +85,7 @@ class ArticleResource extends Resource
                     ->required()
                     ->maxFiles(1)
                     ->acceptedFileTypes(['image/*'])
-                    ->helperText('Unggah gambar artikel dengan format JPG, JPEG, PNG, atau GIF.'),
+                    ->helperText('Unggah gambar artikel dengan format JPG, JPEG, PNG, WEBP atau GIF.'),
             ]);
     }
 

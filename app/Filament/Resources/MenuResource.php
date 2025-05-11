@@ -79,7 +79,7 @@ class MenuResource extends Resource
                     ->required()
                     ->maxFiles(1)
                     ->acceptedFileTypes(['image/*'])
-                    ->helperText('Unggah gambar menu dengan format JPG, JPEG, PNG, atau GIF.'),
+                    ->helperText('Unggah gambar menu dengan format JPG, JPEG, PNG, WEBP, atau GIF.'),
                 Forms\Components\Toggle::make('is_available')
                     ->label('Apakah menu ini tersedia?')
                     ->helperText('Tandai jika menu ini tersedia untuk dipesan.')
