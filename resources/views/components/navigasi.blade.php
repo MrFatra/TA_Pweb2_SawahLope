@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="relative text-[#111] hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
+                <a href="{{ route('menu.list') }}" class="relative text-[#111] hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
                     Makanan
                 </a>
             </li>
@@ -48,7 +48,7 @@
     <div id="mobileMenu" class="md:hidden hidden px-6 pb-4">
         <ul class="flex flex-col space-y-4">
             <li><a href="/" class="text-[#111] hover:text-green-500">Beranda</a></li>
-            <li><a href="#" class="text-[#111] hover:text-green-500">Makanan</a></li>
+            <li><a href="{{ route('menu.list') }}" class="text-[#111] hover:text-green-500">Makanan</a></li>
             <li><a href="#" class="text-[#111] hover:text-green-500">Reservasi</a></li>
             <li><a href="/artikel" class="text-[#111] hover:text-green-500">Artikel</a></li>
             <li><a href="#" class="text-[#111] hover:text-green-500">Peta Panduan</a></li>
