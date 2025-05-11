@@ -33,7 +33,8 @@
                                             <p class="mt-2 mb-4 text-justify">{{ $menu->description }}</p>
                                         </div>
                                     </div>
-                                    <h4 class="font-semibold text-lg pt-5 pl-3">Rp. {{ number_format($menu->price, 0, ',', '.') }}</h4>
+                                    <h4 class="font-semibold text-lg pt-5 pl-3">Rp.
+                                        {{ number_format($menu->price, 0, ',', '.') }}</h4>
                                     <form action="{{ route('cart.add') }}" method="POST" class="flex flex-col">
                                         <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                                         @csrf
@@ -60,45 +61,55 @@
             </div>
 
             <!-- Kanan: Cart -->
-            <div class="w-full lg:w-1/3 p-6 h-full block lg:sticky top-16  overflow-y-auto">
-                <div class="p-5 rounded bg-gray-100 shadow-xl">
-                    <h2 class="text-2xl font-bold mb-4">Rincian Pesanan</h2>
-                    <div class="space-y-4">
-                        @foreach ($carts as $cart)
-                            <div class="relative flex justify-between items-center border-b pb-2">
-                                <div class="flex-1">
-                                    <p class="font-semibold">{{ $cart->menu->name }}</p>
-                                    <p class="text-sm text-gray-500">{{ $cart->quantity }} x</p>
+            @if (session('ticket_id'))
+                <div class="w-full lg:w-1/3 p-6 h-full block lg:sticky top-16  overflow-y-auto">
+                    <div class="p-5 rounded-md bg-white shadow-xl/30">
+                        <h2 class="text-2xl font-bold mb-4">Rincian Pesanan</h2>
+                        <div class="space-y-4">
+                            @foreach ($carts as $cart)
+                                <div class="relative flex justify-between items-center border-b pb-2">
+                                    <div class="flex-1">
+                                        <p class="font-semibold">{{ $cart->menu->name }}</p>
+                                        <p class="text-sm text-gray-500">{{ $cart->quantity }} x</p>
+                                    </div>
+                                    <p class="flex flex-1 font-medium justify-end mr-2">Rp.
+                                        {{ number_format($cart->menu->price * $cart->quantity, 0, ',', '.') }}</p>
+                                    <form action="{{ route('cart.remove', $cart->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            class="bg-red-500 hover:bg-red-700 rounded-md px-2 py-1 text-white cursor-pointer"><i
+                                                class="fa-solid fa-xmark"></i></button>
+                                    </form>
                                 </div>
-                                <p class="flex flex-1 font-medium justify-end mr-2">Rp.
-                                    {{ number_format($cart->menu->price * $cart->quantity, 0, ',', '.') }}</p>
-                                <form action="{{ route('cart.remove', $cart->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button
-                                        class="bg-red-500 hover:bg-red-700 rounded-md px-2 py-1 text-white cursor-pointer"><i
-                                            class="fa-solid fa-xmark"></i></button>
-                                </form>
+                            @endforeach
+                            <div class="flex justify-between">
+                                <h2 class="text-lg font-bold">Total:</h2>
+                                @php
+                                    $total = $carts->sum(function ($cart) {
+                                        return $cart->menu->price * $cart->quantity;
+                                    });
+                                @endphp
+                                <p class="font-medium">Rp. {{ number_format($total, 0, ',', '.') }}</p>
                             </div>
-                        @endforeach
-                        <div class="flex justify-between">
-                            <h2 class="text-lg font-bold">Total:</h2>
-                            @php
-                                $total = $carts->sum(function ($cart) {
-                                    return $cart->menu->price * $cart->quantity;
-                                });
-                            @endphp
-                            <p class="font-medium">Rp. {{ number_format($total, 0, ',', '.') }}</p>
-                        </div>
-                        <div class="pt-2 border-t mt-3">
-                            <div class="my-10">
-                                <x-button class="w-full">Pesan Sekarang</x-button>
+                            <div class="pt-2 border-t mt-3">
+                                <div class="my-10">
+                                    <x-button class="w-full">Pesan Sekarang</x-button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="w-full lg:w-1/3 p-10 h-full block lg:sticky top-16 overflow-y-auto">
+                    <div class="p-5 rounded bg-white shadow-xl/30">
+                        <p class="font-bold text-xl text-center text-gray-500">Silahkan login terlebih dahulu untuk melakukan reservasi.</p>
+                    </div>
+                </div>
+            @endif
+
         </div>
+
     </div>
 
     <script>
