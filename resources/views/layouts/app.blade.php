@@ -24,11 +24,15 @@
 </head>
 
 <body>
+    <livewire:toasts />
+
     <x-navigasi />
     <div class="container mx-auto">
         @yield('content')
     </div>
     <x-footer />
+
+    @livewireScriptConfig
 </body>
 
 </html>

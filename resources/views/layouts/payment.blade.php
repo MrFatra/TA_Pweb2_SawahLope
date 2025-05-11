@@ -27,7 +27,11 @@
 </head>
 
 <body class="">
+    <livewire:toasts />
+
     @yield('content')
+
+    @livewireScriptConfig
 </body>
 
 </html>

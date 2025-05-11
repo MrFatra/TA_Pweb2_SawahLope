@@ -12,7 +12,8 @@
         "laravel/tinker": "^2.10.1",
         "midtrans/midtrans-php": "^2.6",
         "mohamedsabil83/filament-forms-tinyeditor": "^2.4",
-        "mokhosh/filament-rating": "^1.4"
+        "mokhosh/filament-rating": "^1.4",
+        "usernotnull/tall-toasts": "^2.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
