@@ -15,28 +15,28 @@
         </div>
 
         <!-- Menu Desktop -->
-        <ul class="hidden md:flex space-x-10 items-center">
+        <ul class="hidden md:flex space-x-10 items-center text-gray-800 font-medium">
             <li>
                 <a href="{{ route('landing') }}"
-                    class="relative text-[#111] hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
+                    class="relative hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
                     Beranda
                 </a>
             </li>
             <li>
                 <a href="{{ route('menu.list') }}"
-                    class="relative text-[#111] hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
+                    class="relative hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
                     Makanan
                 </a>
             </li>
             <li>
                 <a href="{{ route('article.list') }}"
-                    class="relative text-[#111] hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
+                    class="relative hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
                     Artikel
                 </a>
             </li>
             <li>
-                <a href="{{ route('peta') }}"
-                    class="relative text-[#111] hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
+                <a href="{{ route('map.view') }}"
+                    class="relative hover:text-green-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-green-500 after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500">
                     Peta Panduan
                 </a>
             </li>
@@ -70,11 +70,11 @@
             @else
                 <li>
                     <a href="{{ route('auth.login') }}"
-                        class="border border-green-500 rounded-md py-2 px-5 hover:bg-green-500 hover:text-white cursor-pointer">Login</a>
+                        class="border border-green-500 rounded-md py-3 px-5 hover:bg-green-500 hover:text-white cursor-pointer">Login</a>
                 </li>
                 <li>
                     <a href="{{ route('pay.buyTicket.view') }}"
-                        class="bg-green-500 rounded-md py-2 px-5 hover:bg-green-700 text-white cursor-pointer">Beli
+                        class="bg-green-500 rounded-md py-3 px-5 hover:bg-green-700 text-white cursor-pointer">Beli
                         Tiket</a>
                 </li>
             @endif
@@ -84,10 +84,10 @@
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="md:hidden hidden px-6 pb-4">
         <ul class="flex flex-col space-y-4">
-            <li><a href="{{ route('landing') }}" class="text-[#111] hover:text-green-500">Beranda</a></li>
-            <li><a href="{{ route('menu.list') }}" class="text-[#111] hover:text-green-500">Makanan</a></li>
-            <li><a href="{{ route('article.list') }}" class="text-[#111] hover:text-green-500">Artikel</a></li>
-            <li><a href="{{ route('peta') }}" class="text-[#111] hover:text-green-500">Peta Panduan</a></li>
+            <li><a href="{{ route('landing') }}" class="hover:text-green-500">Beranda</a></li>
+            <li><a href="{{ route('menu.list') }}" class="hover:text-green-500">Makanan</a></li>
+            <li><a href="{{ route('article.list') }}" class="hover:text-green-500">Artikel</a></li>
+            <li><a href="{{ route('map.view') }}" class="hover:text-green-500">Peta Panduan</a></li>
             <li>
                 <img class=""
                     src="https://ui-avatars.com/api/?name={{ session('full_name') }}&background=random&rounded=true"

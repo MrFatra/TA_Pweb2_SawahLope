@@ -2,12 +2,13 @@
 
 
 @section('content')
-<div class="">
+<div class="flex flex-col gap-10">
     @include('sections.hero')
     @include('sections.layanan')
+    @include('sections.infografis')
     @include('sections.makanan')
-    @include('sections.tiket')
-    @include('sections.listArtikel')
+    @include('sections.list-artikel')
     @include('sections.quotes')
+    @include('sections.tiket')
 </div>
 @endsection

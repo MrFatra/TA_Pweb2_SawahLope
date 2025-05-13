@@ -39,7 +39,7 @@
                 @foreach ($suggestedArticles as $article)
                     <div class="xl:my-5 my-3">
                         <p class="text-green-500 font-semibold">{{ $article->category }}</p>
-                        <a href="{{ route('article.detail', $article->slug) }}">
+                        <a href="{{ route('article.view', $article->slug) }}">
                             <h5 class="font-semibold xl:text-xl text-base text-gray-900">
                                 {{ $article->title }}
                             </h5>

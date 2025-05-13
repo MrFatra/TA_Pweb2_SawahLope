@@ -1,69 +1,34 @@
-<section class="pb-16 lg:px-10 px-4">
-    <div class="flex justify-between pb-3">
-        <h1 class="lg:text-3xl text-xl font-semibold text-green-500 mb-5">Sekilas Makanan</h1>
-        <a href="">Lihat Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+<section class="px-4 lg:px-16">
+    <div class="flex justify-between items-center mb-10">
+      <h1 class="text-4xl font-bold text-green-500">🍜 Sekilas Makanan</h1>
+      <a href="{{ route('menu.list') }}"
+        class="inline-flex items-center gap-3 px-5 py-3 border border-green-500 text-green-600 font-semibold rounded-full hover:bg-green-500 hover:text-white transition duration-300">
+        <span>Lihat Selengkapnya</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
     </div>
-    <div class="grid md:grid-cols-4 grid-cols-1 gap-8">
-        <div class="hoverCard group relative rounded overflow-hidden cursor-pointer after:content-[''] hover:after:absolute after:inset-0 after:bg-[#34e0a1]/90">
-            <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/0896b65a-6d1e-4583-b60c-573359528121_Go-Biz_20220218_132132.jpeg" alt="" class="w-full h-[300px] object-cover">
-
-            <h5 class="titleHoverCard absolute bottom-5 pl-5 pr-3 rounded-r py-1 font-semibold text-white bg-[#34e0a1]">Paket Nasi Timbel</h5>
-
-            <div class="contentHoverCard group-hover:block hidden text-xs absolute bottom-0 lg:p-5 p-3 z-10 text-white">
-                <h5 class="font-semibold text-base">Paket Nasi Timbel</h5>
-                <p class="mt-2 mb-4 text-justify">Merupakan sebuah kampung adat yang masih lestari. Masyarakatnya masih memegang adat tradisi nenek moyang mereka </p>
-                <span class="flex items-center gap-3 text-lg"><span>Pesan Sekarang</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"></path>
-                    </svg>
-                </span>
-            </div>
+  
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+      @foreach ([1,2,3,4] as $item)
+      <div
+        class="group relative rounded-md overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform ">
+        <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/0896b65a-6d1e-4583-b60c-573359528121_Go-Biz_20220218_132132.jpeg"
+          alt="Makanan"
+          class="w-full h-72 object-cover transition duration-500">
+        
+        <!-- Overlay -->
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-green-500 via-green-700/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out">
         </div>
-        <div class="hoverCard group relative rounded overflow-hidden cursor-pointer after:content-[''] hover:after:absolute after:inset-0 after:bg-[#34e0a1]/90">
-            <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/0896b65a-6d1e-4583-b60c-573359528121_Go-Biz_20220218_132132.jpeg" alt="" class="w-full h-[300px] object-cover">
-
-            <h5 class="titleHoverCard absolute bottom-5 pl-5 pr-3 rounded-r py-1 font-semibold text-white bg-[#34e0a1]">Paket Nasi Timbel</h5>
-
-            <div class="contentHoverCard group-hover:block hidden text-xs absolute bottom-0 lg:p-5 p-3 z-10 text-white">
-                <h5 class="font-semibold text-base">Paket Nasi Timbel</h5>
-                <p class="mt-2 mb-4 text-justify">Merupakan sebuah kampung adat yang masih lestari. Masyarakatnya masih memegang adat tradisi nenek moyang mereka </p>
-                <span class="flex items-center gap-3 text-lg"><span>Pesan Sekarang</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"></path>
-                    </svg>
-                </span>
-            </div>
+  
+        <!-- Konten -->
+        <div
+          class="absolute bottom-0 p-5 text-white z-10 transition duration-300 ease-in-out transform translate-y-full group-hover:translate-y-0">
+          <h3 class="text-lg font-bold">Paket Nasi Timbel</h3>
+          <p class="text-sm mt-1">Makanan khas Sunda dengan rasa autentik dan penyajian yang menggoda selera.</p>
         </div>
-        <div class="hoverCard group relative rounded overflow-hidden cursor-pointer after:content-[''] hover:after:absolute after:inset-0 after:bg-[#34e0a1]/90">
-            <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/0896b65a-6d1e-4583-b60c-573359528121_Go-Biz_20220218_132132.jpeg" alt="" class="w-full h-[300px] object-cover">
-
-            <h5 class="titleHoverCard absolute bottom-5 pl-5 pr-3 rounded-r py-1 font-semibold text-white bg-[#34e0a1]">Paket Nasi Timbel</h5>
-
-            <div class="contentHoverCard group-hover:block hidden text-xs absolute bottom-0 lg:p-5 p-3 z-10 text-white">
-                <h5 class="font-semibold text-base">Paket Nasi Timbel</h5>
-                <p class="mt-2 mb-4 text-justify">Merupakan sebuah kampung adat yang masih lestari. Masyarakatnya masih memegang adat tradisi nenek moyang mereka </p>
-                <span class="flex items-center gap-3 text-lg"><span>Pesan Sekarang</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"></path>
-                    </svg>
-                </span>
-            </div>
-        </div>
-        <div class="hoverCard group relative rounded overflow-hidden cursor-pointer after:content-[''] hover:after:absolute after:inset-0 after:bg-[#34e0a1]/90">
-            <img src="https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/0896b65a-6d1e-4583-b60c-573359528121_Go-Biz_20220218_132132.jpeg" alt="" class="w-full h-[300px] object-cover">
-
-            <h5 class="titleHoverCard absolute bottom-5 pl-5 pr-3 rounded-r py-1 font-semibold text-white bg-[#34e0a1]">Paket Nasi Timbel</h5>
-
-            <div class="contentHoverCard group-hover:block hidden text-xs absolute bottom-0 lg:p-5 p-3 z-10 text-white">
-                <h5 class="font-semibold text-base">Paket Nasi Timbel</h5>
-                <p class="mt-2 mb-4 text-justify">Merupakan sebuah kampung adat yang masih lestari. Masyarakatnya masih memegang adat tradisi nenek moyang mereka </p>
-                <span class="flex items-center gap-3 text-lg"><span>Pesan Sekarang</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"></path>
-                    </svg>
-                </span>
-            </div>
-        </div>
-
+      </div>
+      @endforeach
     </div>
-</section>
+  </section>
+  

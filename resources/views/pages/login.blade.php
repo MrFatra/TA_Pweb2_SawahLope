@@ -7,7 +7,7 @@
             <img src="{{ asset('images/login-banner-2.jpg') }}" alt="Login Image" class="object-cover h-full w-full">
         </div>
 
-        <div class="w-full md:w-1/2 flex justify-center p-10 flex-col">
+        <div class="w-full md:w-1/2 flex justify-center p-10 flex-col text-gray-800">
             <div class="flex items-center mb-5 gap-2">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo Sawah Lope" class="w-10 h-auto" />
                 <h1 class="text-green-500 font-semibold text-4xl">Sawah Lope</h1>
@@ -21,21 +21,21 @@
                     <div class="relative">
                         <input id="ticket_code" name="ticket_code" type="text" required autofocus
                             placeholder="Masukkan Kode Tiket"
-                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-5 py-4 pr-12">
+                            class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-5 py-3 pr-12">
 
                         <!-- Ikon Eye -->
                         <div class="absolute inset-y-0 right-0 flex items-center pr-4 cursor-pointer">
                             <i class="fa-solid fa-eye-slash fa-lg text-gray-500"></i>
                         </div>
                     </div>
-                    <p class="text-sm text-gray-500 font-medium mt-1">Kode tiket dikirim melalui email. Siahkan cek email
+                    <p class="text-sm text-gray-500 font-medium mt-1">Kode tiket dikirim melalui email. Silahkan cek email
                         anda.</p>
                 </div>
                 <button type="submit"
-                    class="w-full bg-green-500 text-white py-3 rounded-md hover:bg-green-700 transition cursor-pointer">Login</button>
+                    class="w-full text-lg font-bold tracking-wide bg-green-500 text-white py-3 rounded-md hover:bg-green-700 transition cursor-pointer">Login</button>
             </form>
-            <p class="font-medium text-gray-500 mt-3">Belum membeli tiket? <a href="{{ route('pay.buyTicket.view') }}"
-                    class="text-blue-500 hover:underline">Beli sekarang!</a></p>
+            <p class="font-medium mt-3">Belum membeli tiket? <a href="{{ route('pay.buyTicket.view') }}"
+                    class="text-green-500 hover:underline">Beli sekarang!</a></p>
         </div>
     </div>
 

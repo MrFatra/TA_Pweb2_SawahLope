@@ -55,18 +55,22 @@
             </div>
 
             <div id="loading-overlay"
-                class="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50 hidden">
-                <div class="text-center">
-                    <svg class="animate-spin h-10 w-10 text-green-500 mx-auto" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                            stroke-width="4">
-                        </circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                    </svg>
-                    <p class="mt-4 text-green-600 font-semibold">Mengalihkan halaman...</p>
+                class="fixed inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-all duration-300">
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="relative">
+                        <div class="absolute inset-0 animate-ping rounded-full bg-green-300 opacity-50 w-12 h-12 mx-auto">
+                        </div>
+                        <svg class="relative animate-spin h-12 w-12 text-green-500 drop-shadow"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-green-700 font-semibold text-lg animate-pulse tracking-wide">Mengalihkan halaman...</p>
                 </div>
             </div>
+
         </div>
     </div>
 
