@@ -9,22 +9,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderNotification extends Mailable
+class ReservationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
-    public $ticket;
-    public $user;
+    public $ticketCode, $reservation, $payment;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($order, $ticket, $user)
+    public function __construct($ticketCode, $reservation, $payment)
     {
-        $this->order = $order;
-        $this->ticket = $ticket;
-        $this->user = $user;
+        $this->ticketCode = $ticketCode;
+        $this->reservation = $reservation;
+        $this->payment = $payment;
     }
 
     /**
@@ -33,7 +31,7 @@ class OrderNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Notification',
+            subject: 'Reservation Mail',
         );
     }
 
@@ -43,12 +41,7 @@ class OrderNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.order-notification',
-            with: [
-                'order' => $this->order,
-                'ticket' => $this->ticket,
-                'user' => $this->user,
-            ],
+            view: 'emails.reservation-mail',
         );
     }
 
