@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function show()
+    public function viewList()
     {
         $articles = Article::paginate(6);
 
         return view('pages.artikel', compact('articles'));
     }
 
-    public function articleDetail($slug)
+    public function viewArticle($slug)
     {
         $article = Article::where('slug', $slug)->firstOrFail();
 

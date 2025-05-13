@@ -42,7 +42,7 @@
                     <div class="md:col-span-3 md:mt-0 mt-3">
                         <p class="text-green-500 font-semibold">{{ $article->category }}</p>
 
-                        <a href="{{ route('article.detail', $article->slug) }}">
+                        <a href="{{ route('article.view', $article->slug) }}">
                             <h3 class="text-xl font-bold mb-3 text-gray-900 ">
                                 {{ $article->title }}
                             </h3>
