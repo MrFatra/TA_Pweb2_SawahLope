@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\MidtransConfig;
+use App\Mail\ReservationMail;
 use App\Mail\TicketNotification;
 use App\Models\Payment;
+use App\Models\Reservation;
+use App\Models\ReservationMenu;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -107,5 +110,60 @@ class PaymentController extends Controller
         session()->regenerate();
 
         return response()->json(['message' => 'Pembayaran berhasil. Silahkan cek email anda untuk mendapatkan kode.']);;
+    }
+
+    public function payReservation(Request $request)
+    {
+        $requestData = json_decode($request->getContent(), true);
+
+        $ticketId = $requestData['ticketId'];
+
+        $ticket = Ticket::with('carts')->find($ticketId);
+
+        $total = $ticket->carts->sum(function ($cart) {
+            return $cart->menu->price * $cart->quantity;
+        }) + $ticket->total_price;
+
+        $reservation = Reservation::create([
+            'ticket_id' => $ticketId,
+            'full_name' => $ticket->full_name,
+            'full_name' => $ticket->phone_number,
+            'email' => $ticket->email,
+            'reservation_date' => $ticket->visit_date,
+            'guest_count' => $ticket->guest_count,
+            'total_price' => $total,
+            // 'status' => 'confirmed'
+        ]);
+
+        foreach ($ticket->carts as $cart) {
+            ReservationMenu::create([
+                'reservation_id' => $reservation->id,
+                'menu_id' => $cart->menu_id,
+                'quantity' => $cart->quantity,
+                'subtotal' => $cart->menu->price * $cart->quantity,
+            ]);
+        }
+
+        $payment = Payment::create([
+            'full_name' => $ticket->full_name,
+            'phone_number' => $ticket->phone_number,
+            'email' => $ticket->email,
+            'payable_type' => \App\Models\Reservation::class,
+            'payable_id' => $reservation->id,
+            'gross_amount' => $total,
+            'status' => 'paid',
+            'payment_method' => $requestData['payment_method'],
+            'order_id' => $requestData['order_id'],
+        ]);
+
+        Mail::to($ticket->email)->send(new ReservationMail($ticket->ticket_code, $reservation, $payment));
+
+        session()->forget(['snapToken', 'ticket_id']);
+        session()->regenerate();
+
+        return response()->json([
+            'message' => 'Reservasi berhasil.',
+            'reservation_id' => $reservation->id
+        ]);
     }
 }

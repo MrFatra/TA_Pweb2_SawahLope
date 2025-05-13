@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
-
 @section('content')
 <div class="">
-    @include('sections.heroReservasi')
-    @include('sections.formReservasi')
+    @include('sections.hero-reservasi')
+    @include('sections.form-reservasi')
 </div>
 @endsection
