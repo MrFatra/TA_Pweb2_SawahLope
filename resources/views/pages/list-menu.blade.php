@@ -5,7 +5,7 @@
 @endphp
 
 @section('content')
-    <div class="px-2 md:px-5 xl:px-10 py-8">
+    <div class="px-2 md:px-5 xl:px-10 py-8 text-gray-800">
 
         <h2 class="text-4xl font-bold">Daftar Menu</h2>
         <div class="flex flex-col lg:flex-row gap-5">
@@ -18,10 +18,10 @@
                     @endif
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
                         @foreach ($category->menus as $menu)
-                            <div class="flex flex-col border-2 border-green-500 rounded overflow-hidden">
+                            <div class="flex flex-col rounded-md overflow-hidden shadow-xl border-gray-300 border-4">
                                 <div class="px-2 py-2 flex flex-col">
                                     <div
-                                        class="group relative rounded overflow-hidden cursor-pointer hover:after:absolute after:inset-0 after:bg-[#34e0a1]/90">
+                                        class="group relative rounded-md overflow-hidden cursor-pointer hover:after:absolute after:inset-0 after:bg-[#34e0a1]/90">
                                         <img src="{{ Storage::url($menu->image) }}" alt=""
                                             class="w-full h-[200px] object-cover">
                                         <h5
@@ -42,8 +42,8 @@
                                             class="flex justify-between items-center gap-6 font-semibold text-white text-xl mt-3 mb-3 border-gray-300 border-2 rounded-full">
                                             <i
                                                 class="fa-solid fa-minus btn-minus bg-red-500 hover:bg-red-700 rounded-full px-3 py-2 cursor-pointer"></i>
-                                            <input type="number" value="1" name="quantity"
-                                                class="menu-qty w-full text-black text-center focus:border focus:border-green-400 focus:outline-none focus:ring-0 text-base" />
+                                                <input type="number" value="1" name="quantity"
+                                                class="menu-qty w-full text-black text-center border border-transparent focus:border-green-400 focus:outline-none focus:ring-0 text-base transition-all duration-200" />                                            
                                             <i
                                                 class="fa-solid fa-plus btn-plus bg-green-500 hover:bg-green-700 rounded-full px-3 py-2 cursor-pointer"></i>
                                         </div>
@@ -62,8 +62,8 @@
 
             <!-- Kanan: Cart -->
             @if (session('ticket_id'))
-                <div class="w-full lg:w-1/3 p-6 h-full block lg:sticky top-16  overflow-y-auto">
-                    <div class="p-5 rounded-md bg-white shadow-xl/30">
+                <div class="w-full lg:w-1/3 p-6 h-full block lg:sticky top-16 overflow-y-auto">
+                    <div class="p-5 rounded-md bg-white shadow-xl/20 border-r-8 border-r-green-500 border border-green-500">
                         <h2 class="text-2xl font-bold mb-4">Rincian Pesanan</h2>
                         <div class="space-y-4">
                             @foreach ($carts as $cart)
@@ -83,7 +83,7 @@
                                     </form>
                                 </div>
                             @endforeach
-                            <div class="flex justify-between">
+                            <div class="flex justify-between mt-10">
                                 <h2 class="text-lg font-bold">Total:</h2>
                                 @php
                                     $total = $carts->sum(function ($cart) {
@@ -92,18 +92,18 @@
                                 @endphp
                                 <p class="font-medium">Rp. {{ number_format($total, 0, ',', '.') }}</p>
                             </div>
-                            <div class="pt-2 border-t mt-3">
-                                <div class="my-10">
-                                    <x-button class="w-full">Pesan Sekarang</x-button>
-                                </div>
+                            <div class="mt-5">
+                                <x-button href="{{ route('reservation.view') }}"
+                                    class="flex items-center justify-center rounded-md">Pesan Sekarang!</x-button>
                             </div>
                         </div>
                     </div>
                 </div>
             @else
                 <div class="w-full lg:w-1/3 p-10 h-full block lg:sticky top-16 overflow-y-auto">
-                    <div class="p-5 rounded bg-white shadow-xl/30">
-                        <p class="font-bold text-xl text-center text-gray-500">Silahkan login terlebih dahulu untuk melakukan reservasi.</p>
+                    <div class="p-5 rounded-md bg-white shadow-xl/20 border-r-8 border-r-green-500 border border-green-500">
+                        <p class="font-bold text-xl text-center text-gray-500">Silahkan login terlebih dahulu untuk
+                            melakukan reservasi.</p>
                     </div>
                 </div>
             @endif
