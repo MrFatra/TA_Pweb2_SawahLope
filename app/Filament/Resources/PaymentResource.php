@@ -117,7 +117,7 @@ class PaymentResource extends Resource
                     ->collapsible()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('transaction_id')
+                        Forms\Components\TextInput::make('order_id')
                             ->label('ID Transaksi')
                             ->required()
                             ->readOnly()
@@ -161,7 +161,7 @@ class PaymentResource extends Resource
                     ->collapsible()
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('transaction_id')
+                        Forms\Components\TextInput::make('order_id')
                             ->label('ID Transaksi')
                             ->required()
                             ->readOnly()
@@ -206,7 +206,7 @@ class PaymentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('transaction_id')
+                Tables\Columns\TextColumn::make('order_id')
                     ->label('ID Transaksi')
                     ->sortable()
                     ->searchable(),
@@ -260,7 +260,6 @@ class PaymentResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make()->color('info'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -280,9 +279,7 @@ class PaymentResource extends Resource
     {
         return [
             'index' => Pages\ListPayments::route('/'),
-            'create' => Pages\CreatePayment::route('/create'),
             'view' => Pages\ViewPayment::route('/{record}'),
-            'edit' => Pages\EditPayment::route('/{record}/edit'),
         ];
     }
 }
