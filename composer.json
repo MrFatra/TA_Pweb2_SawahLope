@@ -13,7 +13,8 @@
         "midtrans/midtrans-php": "^2.6",
         "mohamedsabil83/filament-forms-tinyeditor": "^2.4",
         "mokhosh/filament-rating": "^1.4",
-        "realrashid/sweet-alert": "^7.3"
+        "realrashid/sweet-alert": "^7.3",
+        "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

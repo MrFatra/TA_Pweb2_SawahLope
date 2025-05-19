@@ -13,16 +13,17 @@ class ReservationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $ticketCode, $reservation, $payment;
+    public $ticketCode, $reservation, $payment, $qrImage;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($ticketCode, $reservation, $payment)
+    public function __construct($ticketCode, $reservation, $payment, $qrImage)
     {
         $this->ticketCode = $ticketCode;
         $this->reservation = $reservation;
         $this->payment = $payment;
+        $this->qrImage = $qrImage;
     }
 
     /**

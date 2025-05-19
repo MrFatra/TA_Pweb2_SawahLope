@@ -55,8 +55,14 @@
             Kode Tiket: {{ $ticketCode }}
         </div>
 
+        <p style="font-weight: bold;">Atau pakai QR Code berikut ini:</p>
+
+        {{-- Gambar QR Code dari CID Attachment --}}
+        {!! $message->embedData($qrCodeData, 'qrcode.png', 'image/png') !!}
+
         <ul>
-            <li><strong>Tanggal Kunjungan:</strong> {{ \Carbon\Carbon::parse($reservation['visit_date'])->format('d M Y') }}</li>
+            <li><strong>Tanggal Kunjungan:</strong>
+                {{ \Carbon\Carbon::parse($reservation['visit_date'])->format('d M Y') }}</li>
             <li><strong>Jumlah Tamu:</strong> {{ $reservation['guest_count'] }} orang</li>
             <li><strong>Metode Pembayaran:</strong> {{ ucfirst($payment['payment_method'] ?? '-') }}</li>
             <li><strong>Total Dibayar:</strong> Rp {{ number_format($payment['amount'] ?? 0, 0, ',', '.') }}</li>

@@ -170,7 +170,6 @@
         }
     }
 
-
     document.addEventListener("DOMContentLoaded", function() {
         const payButton = document.getElementById('pay-button');
         const loadingOverlay = document.getElementById('loading-overlay');
@@ -192,15 +191,21 @@
                                 order_id: result.order_id
                             })
                         })
-                        .then(response => response.json())
+                        .then(response => {
+                            if (!response.ok) {
+                                return response.json().then(err => {
+                                    throw new Error(err.message);
+                                });
+                            }
+                            return response.json();
+                        })
                         .then(data => {
                             window.location.href = "{{ route('landing') }}";
                         })
                         .catch(error => {
-                            console.error("Terjadi kesalahan:", error);
+                            console.error("Terjadi kesalahan:", error.message);
                             alert("Terjadi kesalahan saat memproses pembayaran.");
                             loadingOverlay.classList.add('hidden');
-                            paymentCard.classList.remove('hidden');
                         });
                 },
                 onPending: function(result) {

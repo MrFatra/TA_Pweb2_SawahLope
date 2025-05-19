@@ -1,7 +1,7 @@
 <section class="py-10 md:px-10 mx-10">
     <div class="relative h-[450px] rounded-3xl overflow-hidden shadow-xl group">
         
-        <img src="https://getlost.id/wp-content/uploads/2021/04/ciremai_1799578267.jpg" alt="Sawah Lope"
+        <img src="https://images.unsplash.com/photo-1621394988863-117a9fc6e77f?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sawah Lope"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out">
 
         <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-transparent"></div>

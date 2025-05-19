@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Midtrans\Snap;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReservationController extends Controller
 {

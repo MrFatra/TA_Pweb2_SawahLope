@@ -9,9 +9,12 @@ use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\ReservationMenu;
 use App\Models\Ticket;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Midtrans\Snap;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PaymentController extends Controller
 {
@@ -114,56 +117,80 @@ class PaymentController extends Controller
 
     public function payReservation(Request $request)
     {
-        $requestData = json_decode($request->getContent(), true);
+        try {
+            $requestData = json_decode($request->getContent(), true);
 
-        $ticketId = $requestData['ticketId'];
+            $ticketId = $requestData['ticketId'];
 
-        $ticket = Ticket::with('carts')->find($ticketId);
+            $ticket = Ticket::with('carts')->find($ticketId);
 
-        $total = $ticket->carts->sum(function ($cart) {
-            return $cart->menu->price * $cart->quantity;
-        }) + $ticket->total_price;
+            $total = $ticket->carts->sum(function ($cart) {
+                return $cart->menu->price * $cart->quantity;
+            }) + $ticket->total_price;
 
-        $reservation = Reservation::create([
-            'ticket_id' => $ticketId,
-            'full_name' => $ticket->full_name,
-            'full_name' => $ticket->phone_number,
-            'email' => $ticket->email,
-            'reservation_date' => $ticket->visit_date,
-            'guest_count' => $ticket->guest_count,
-            'total_price' => $total,
-            // 'status' => 'confirmed'
-        ]);
-
-        foreach ($ticket->carts as $cart) {
-            ReservationMenu::create([
-                'reservation_id' => $reservation->id,
-                'menu_id' => $cart->menu_id,
-                'quantity' => $cart->quantity,
-                'subtotal' => $cart->menu->price * $cart->quantity,
+            $reservation = Reservation::create([
+                'ticket_id' => $ticketId,
+                'full_name' => $ticket->full_name,
+                'phone_number' => $ticket->phone_number,
+                'email' => $ticket->email,
+                'reservation_date' => $ticket->visit_date,
+                'guest_count' => $ticket->guest_count,
+                'total_price' => $total,
+                // 'status' => 'confirmed'
             ]);
+
+            foreach ($ticket->carts as $cart) {
+                ReservationMenu::create([
+                    'reservation_id' => $reservation->id,
+                    'menu_id' => $cart->menu_id,
+                    'quantity' => $cart->quantity,
+                    'subtotal' => $cart->menu->price * $cart->quantity,
+                ]);
+            }
+
+            $payment = Payment::create([
+                'full_name' => $ticket->full_name,
+                'phone_number' => $ticket->phone_number,
+                'email' => $ticket->email,
+                'payable_type' => \App\Models\Reservation::class,
+                'payable_id' => $reservation->id,
+                'gross_amount' => $total,
+                'status' => 'paid',
+                'payment_method' => $requestData['payment_method'],
+                'order_id' => $requestData['order_id'],
+            ]);
+
+            $qrCodeData = QrCode::format('png')->size(300)->generate($ticket->ticket_code);
+
+            Mail::send('emails.reservation-mail', [
+                'ticketCode' => $ticket->ticket_code,
+                'qrCodeData' => $qrCodeData,
+                'reservation' => [
+                    'full_name' => $ticket->full_name,
+                    'visit_date' => $ticket->visit_date,
+                    'guest_count' => $ticket->guest_count,
+                ],
+                'payment' => [
+                    'payment_method' => $requestData['payment_method'],
+                    'amount' => $total,
+                    'order_id' => $requestData['order_id'],
+                ],
+            ], function ($message) use ($ticket) {
+                $message->to($ticket->email)->subject('Tiket Reservasi');
+            });
+
+
+            session()->forget(['snapToken', 'ticket_id']);
+            session()->regenerate();
+
+            return response()->json([
+                'message' => 'Reservasi berhasil.',
+                'reservation_id' => $reservation->id
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => "Reservasi gagal: " . $e->getMessage(),
+            ], 500);
         }
-
-        $payment = Payment::create([
-            'full_name' => $ticket->full_name,
-            'phone_number' => $ticket->phone_number,
-            'email' => $ticket->email,
-            'payable_type' => \App\Models\Reservation::class,
-            'payable_id' => $reservation->id,
-            'gross_amount' => $total,
-            'status' => 'paid',
-            'payment_method' => $requestData['payment_method'],
-            'order_id' => $requestData['order_id'],
-        ]);
-
-        Mail::to($ticket->email)->send(new ReservationMail($ticket->ticket_code, $reservation, $payment));
-
-        session()->forget(['snapToken', 'ticket_id']);
-        session()->regenerate();
-
-        return response()->json([
-            'message' => 'Reservasi berhasil.',
-            'reservation_id' => $reservation->id
-        ]);
     }
 }
