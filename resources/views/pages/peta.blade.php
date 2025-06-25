@@ -12,7 +12,7 @@
                     Sawah Lope berlokasi di Desa Cikaso, menghadirkan nuansa pedesaan yang asri dan kuliner khas Sunda
                     seperti nasi oncom yang menggugah selera. Cocok untuk wisata kuliner dan edukasi budaya lokal.
                 </p>
-                <a href="https://goo.gl/maps/jshxciix2sS1cshPA" target="_blank"
+                <a href="https://maps.app.goo.gl/UwryEKgk6uY1Us3z6" target="_blank"
                     class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow">
                     <span>Buka di Google Maps</span>
                     <i class="fa-solid fa-arrow-right-long ml-3"></i>

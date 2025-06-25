@@ -9,7 +9,10 @@ use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('pages.landing');
+    $menu = App\Models\Menu::limit(4)->get();
+    $article = App\Models\Article::limit(4)->get();
+
+    return view('pages.landing', compact('menu', 'article'));
 })->name('landing');
 
 Route::get('/artikel', [ArticleController::class, 'viewList'])->name('article.list');
