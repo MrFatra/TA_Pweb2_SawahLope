@@ -15,9 +15,14 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'ticket_code' => 'required|string'
-        ]);
+        try {
+            $validated = $request->validate([
+                'ticket_code' => 'required|string'
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            toast()->error('Yah!', 'Kode tiket tidak boleh kosong.');
+            return redirect()->back()->withErrors($e->validator)->withInput();
+        }
 
         $ticket = Ticket::where('ticket_code', $request->ticket_code)->first();
 

@@ -47,6 +47,23 @@ class ReservationResource extends Resource
                             )
                             ->required()
                             ->live()
+                            ->afterStateHydrated(function (\Filament\Forms\Set $set, \Filament\Forms\Get $get, $state) {
+                                $ticket = Ticket::find($state);
+
+                                if ($ticket) {
+                                    $set('full_name', $ticket->full_name);
+                                    $set('phone_number', $ticket->phone_number);
+                                    $set('email', $ticket->email);
+                                    $set('guest_count', $ticket->guest_count);
+                                    $set('seat_number', $ticket->seat_number);
+                                    $set('reservation_date', $ticket->visit_date);
+                                    $set('ticket_code', $ticket->ticket_code);
+                                    $set('ticket_price', $ticket->total_price * 1);
+
+                                    $menus = collect($get('reservationMenus'))->filter(fn($menu) => is_array($menu) && isset($menu['menu_id']));
+                                    self::updateTotals($get, $set, $menus, true);
+                                }
+                            })
                             ->afterStateUpdated(function (\Filament\Forms\Set $set, \Filament\Forms\Get $get, $state) {
                                 $ticket = Ticket::find($state);
 

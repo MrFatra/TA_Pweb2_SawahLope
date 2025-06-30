@@ -19,7 +19,7 @@
                 <div class="mb-10">
                     <label for="ticket_code" class="block text-sm font-medium text-gray-700">Kode Tiket</label>
                     <div class="relative">
-                        <input id="ticket_code" name="ticket_code" type="text" required autofocus
+                        <input id="ticket_code" name="ticket_code" type="text" autofocus
                             placeholder="Masukkan Kode Tiket"
                             class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-5 py-3 pr-12">
 

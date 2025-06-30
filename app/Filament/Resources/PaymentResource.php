@@ -36,7 +36,6 @@ class PaymentResource extends Resource
                     ->collapsible()
                     ->columns(2)
                     ->schema([
-
                         Forms\Components\Select::make('payable_type')
                             ->label('Tipe Pembayaran')
                             ->options([
@@ -85,6 +84,7 @@ class PaymentResource extends Resource
                                 $set('full_name', $model?->full_name);
                                 $set('phone_number', $model?->phone_number);
                                 $set('email', $model?->email);
+                                $set('amount', $model?->total_price);
                             })
                             ->required()
                             ->searchable()
@@ -119,13 +119,14 @@ class PaymentResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('order_id')
                             ->label('ID Transaksi')
-                            ->required()
+                            ->default(fn() => strtoupper('ORD-' . now()->format('Ymd-His') . '-' . \Illuminate\Support\Str::random(6)))
                             ->readOnly()
+                            ->required()
+                            ->dehydrated()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('amount')
                             ->label('Jumlah Pembayaran')
                             ->required()
-                            ->readOnly()
                             ->prefix('Rp.')
                             ->numeric()
                             ->minValue(1)
@@ -229,7 +230,7 @@ class PaymentResource extends Resource
                         'success' => \App\Models\Ticket::class,
                         'info' => \App\Models\Reservation::class,
                     ]),
-                Tables\Columns\TextColumn::make('amount')
+                Tables\Columns\TextColumn::make('gross_amount')
                     ->label('Jumlah Pembayaran')
                     ->sortable()
                     ->searchable(),
@@ -279,6 +280,7 @@ class PaymentResource extends Resource
     {
         return [
             'index' => Pages\ListPayments::route('/'),
+            'create' => Pages\CreatePayment::route('/create'),
             'view' => Pages\ViewPayment::route('/{record}'),
         ];
     }

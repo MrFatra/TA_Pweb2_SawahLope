@@ -80,10 +80,10 @@ class MenuResource extends Resource
                     ->maxFiles(1)
                     ->acceptedFileTypes(['image/*'])
                     ->helperText('Unggah gambar menu dengan format JPG, JPEG, PNG, WEBP, atau GIF.'),
-                Forms\Components\Toggle::make('is_available')
-                    ->label('Apakah menu ini tersedia?')
-                    ->helperText('Tandai jika menu ini tersedia untuk dipesan.')
-                    ->default(false)
+                // Forms\Components\Toggle::make('is_available')
+                //     ->label('Apakah menu ini tersedia?')
+                //     ->helperText('Tandai jika menu ini tersedia untuk dipesan.')
+                //     ->default(false)
             ]);
     }
 
@@ -107,11 +107,11 @@ class MenuResource extends Resource
                     ->label('Harga')
                     ->money('IDR', true)
                     ->sortable(),
-                Tables\Columns\IconColumn::make('is_available')
-                    ->boolean()
-                    ->label('Tersedia?')
-                    ->trueIcon('heroicon-o-check-circle')
-                    ->falseIcon('heroicon-o-x-circle'),
+                // Tables\Columns\IconColumn::make('is_available')
+                //     ->boolean()
+                //     ->label('Tersedia?')
+                //     ->trueIcon('heroicon-o-check-circle')
+                //     ->falseIcon('heroicon-o-x-circle'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dibuat Pada')
                     ->dateTime()
